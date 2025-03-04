@@ -1,6 +1,6 @@
 /*
 
-CLASSROOM RUBRICMAKER v1.1
+CLASSROOM RUBRICMAKER v1.2
 This will create a rubric for Google Classroom assignments based on the learning targets selected.
 Created by Jonathan Kung
 
@@ -63,7 +63,7 @@ function copyCheckedSections() {
 
   clearCheckedCheckboxes();
 
-  SpreadsheetApp.getUi().alert("Rubric created successfully! Check the 'Rubric' sheet.");
+  SpreadsheetApp.getUi().alert("Rubric created successfully!\nImport this Sheet using the Google Classroom Assignment Rubric section.\n\nBy Jonathan Kung");
 }
 
 
