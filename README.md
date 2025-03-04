@@ -15,4 +15,5 @@ Copy the Google Sheet available here: [Google Classroom RubricMaker](https://doc
 5. Rubric Tools > Create Rubric.
 6. In Google Classroom, go to your Assignment. After entering the details of the assignment, add a rubric and select "Import from Sheets". Select the sheet you just made.
 
+\* You can change the headings to something other than "Beginning", "Developing", "Competent", and "Mastery" and the new headings will be transferred to the "Select Learning Targets" sheet.
 \* You can duplicate this sheet for different courses and generate rubrics for each course as you like.
