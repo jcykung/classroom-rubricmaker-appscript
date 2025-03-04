@@ -1,4 +1,10 @@
-// This will create a rubric for Google Classroom assignments based on the learning targets selected.
+/*
+
+CLASSROOM RUBRICMAKER v1.1
+This will create a rubric for Google Classroom assignments based on the learning targets selected.
+Created by Jonathan Kung
+
+*/
 
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
@@ -65,6 +71,12 @@ function copyRubricToLearningTargets() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sourceSheet = ss.getSheetByName("Paste Rubric");
   var destinationSheet = ss.getSheetByName("Select Learning Targets");
+  
+  // Retrieve values from B1, C1, D1, E1
+  var b1 = sourceSheet.getRange(1, 2).getValue(); // Column 2 = B
+  var c1 = sourceSheet.getRange(1, 3).getValue(); // Column 3 = C
+  var d1 = sourceSheet.getRange(1, 4).getValue(); // Column 4 = D
+  var e1 = sourceSheet.getRange(1, 5).getValue(); // Column 5 = E
 
   // Get the number of rows in the source sheet (assuming data starts at row 2)
   var lastRow = sourceSheet.getLastRow();
@@ -80,6 +92,14 @@ function copyRubricToLearningTargets() {
   if (response != ui.Button.YES) {
     ui.alert("Action canceled. No changes made.");
     return; // Exit the function if the user clicks "No"
+  }
+
+  // Remove all checkboxes from Column A
+  var lastDestRow = destinationSheet.getLastRow();
+  if (lastDestRow >= 3) {
+    var checkboxRange = destinationSheet.getRange(3, 1, lastDestRow - 2);
+    checkboxRange.clearDataValidations(); // Remove checkboxes
+    checkboxRange.clearContent(); // Clear any remaining values
   }
 
   // Completely clear the "Select Learning Targets" sheet (including formatting, content, and checkboxes)
@@ -103,10 +123,10 @@ function copyRubricToLearningTargets() {
     destinationSheet.getRange(destinationRow, 2).setValue(sourceSheet.getRange(i, 1).getValue()); // A -> B
 
     // Step 3: Write headers in the destination
-    destinationSheet.getRange(destinationRow + 1, 3).setValue("Mastery");
-    destinationSheet.getRange(destinationRow + 1, 4).setValue("Competent");
-    destinationSheet.getRange(destinationRow + 1, 5).setValue("Developing");
-    destinationSheet.getRange(destinationRow + 1, 6).setValue("Beginning");
+    destinationSheet.getRange(destinationRow + 1, 3).setValue(b1);
+    destinationSheet.getRange(destinationRow + 1, 4).setValue(c1);
+    destinationSheet.getRange(destinationRow + 1, 5).setValue(d1);
+    destinationSheet.getRange(destinationRow + 1, 6).setValue(e1);
 
     // Step 4: Copy E (source) to C (destination)
     destinationSheet.getRange(destinationRow + 2, 3).setValue(sourceSheet.getRange(i, 5).getValue()); // E -> C
