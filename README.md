@@ -1,7 +1,8 @@
 # Google Classroom RubricMaker
 
 ## Rationale
-I created this to make it easier to generate rubrics in the proper format to be imported into a Google Classroom Assignment. When editing an assignment, you can create a rubric but you can also import from Sheets. My script generates a Google Sheet that allows you to select certain learning targets and allow them to be imported correctly into Classroom. This means that you can load in all of the learning targets for your course and pick and choose which ones to add to a particular Google Classroom Assignment. You can reuse the sheet and generate a new rubric each time by selecting the learning targets for each assignment. This beats copying and pasting into their rubric editor or typing it all out.
+I kept having to retype or copy and paste rubrics when creating new Google Classroom Assignments and wanted an easy way to generate a rubric on a Google Sheet which I could then import into Classroom (Google Classroom allows you to import rubrics from Google Sheets as long as it's in the proper format). So, I created this script that allows you to paste in a master rubric with all your learning targets and convert it into a format that Google Classroom will accept. Not only that, but you can reuse this Google Sheet and select learning targets specific to an Assignment and easily import that ready-made rubric into Classroom whenever you create a new Assignment. For my own use, I have duplicated the "Google Classroom RubricMaker" sheet and have a copy for each course I teach with a master rubric imported for each course, ready to go.
+
 
 ## Usage
 Copy the Google Sheet available here: [Google Classroom RubricMaker](https://docs.google.com/spreadsheets/d/1sMugQFmxFl5JWtNfcGzrE1Z0E_VqRskVYaMTInfQm4A/copy)
