@@ -1,6 +1,6 @@
 /*
 
-CLASSROOM RUBRICMAKER v1.2
+CLASSROOM RUBRICMAKER v1.3
 This will create a rubric for Google Classroom assignments based on the learning targets selected.
 Created by Jonathan Kung
 
@@ -35,6 +35,8 @@ function copyCheckedSections() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sourceSheet = ss.getSheetByName("Select Learning Targets");
   var rubricSheet = ss.getSheetByName("Rubric");
+  var lastSourceRow = sourceSheet.getLastRow(); // Get last row with data
+  var destinationRow = 3; // Ensure we start writing at A3 in "Rubric"
 
   if (!rubricSheet) {
     rubricSheet = ss.insertSheet("Rubric"); // Create the sheet if it doesn't exist
@@ -42,12 +44,26 @@ function copyCheckedSections() {
 
   // Clear only rows 3 and below to preserve rows 1 and 2
   var lastRow = rubricSheet.getLastRow();
+  var atLeastOneChecked = false; // Flag to check if any checkbox is selected
+
+  // Check if at least one checkbox is selected
+  for (var i = 3; i <= lastSourceRow; i++) {
+    if (sourceSheet.getRange(i, 1).getValue() === true) {
+      atLeastOneChecked = true;
+      break; // Exit loop early if we find a checked box
+    }
+  }
+
+  // If none of the checkboxes are checked, exit
+  if (!atLeastOneChecked) {
+    SpreadsheetApp.getUi().alert("No learning targets selected!\nPlease check at least one checkbox before creating the rubric.");
+    return; // Exit function early
+  }
+
+
   if (lastRow > 2) {
     rubricSheet.getRange(3, 1, lastRow - 2, rubricSheet.getMaxColumns()).clearContent();
   }
-
-  var lastSourceRow = sourceSheet.getLastRow(); // Get last row with data
-  var destinationRow = 3; // Ensure we start writing at A3 in "Rubric"
 
   for (var i = 3; i <= lastSourceRow; i++) { // Start checking from row 3
     var checkbox = sourceSheet.getRange(i, 1).getValue(); // Check Column A
@@ -123,10 +139,10 @@ function copyRubricToLearningTargets() {
     destinationSheet.getRange(destinationRow, 2).setValue(sourceSheet.getRange(i, 1).getValue()); // A -> B
 
     // Step 3: Write headers in the destination
-    destinationSheet.getRange(destinationRow + 1, 3).setValue(b1);
-    destinationSheet.getRange(destinationRow + 1, 4).setValue(c1);
-    destinationSheet.getRange(destinationRow + 1, 5).setValue(d1);
-    destinationSheet.getRange(destinationRow + 1, 6).setValue(e1);
+    destinationSheet.getRange(destinationRow + 1, 3).setValue(e1);
+    destinationSheet.getRange(destinationRow + 1, 4).setValue(d1);
+    destinationSheet.getRange(destinationRow + 1, 5).setValue(c1);
+    destinationSheet.getRange(destinationRow + 1, 6).setValue(b1);
 
     // Step 4: Copy E (source) to C (destination)
     destinationSheet.getRange(destinationRow + 2, 3).setValue(sourceSheet.getRange(i, 5).getValue()); // E -> C
